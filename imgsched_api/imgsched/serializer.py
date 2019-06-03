@@ -4,14 +4,14 @@ from .models import Comment, Meeting, UserProfile
 class UserProfilesSerializers(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        fields = __all__
+        fields = ('user', 'post', 'occupation', 'year')
 
 class MeetingSerializers(serializers.ModelSerializer):
     class Meta:
         model = Meeting
-        fields = __all__
+        fields = ('created_by', 'time_of_creation', 'name_of_meeting', 'description_of_meeting', 'meeting_on', 'venue', 'member')
 
 class CommentSerializers(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = __all__
+        fields = ('sender', 'meeting', 'time_of_comment', 'comment')
