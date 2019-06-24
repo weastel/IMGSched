@@ -39,6 +39,6 @@ class Meeting (models.Model):
 
 class Comment (models.Model):
     sender = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    meeting = models.ForeignKey(Meeting, on_delete=models.CASCADE)
+    meeting = models.ForeignKey(Meeting,related_name='comments', on_delete=models.CASCADE)
     time_of_comment = models.DateTimeField(default = timezone.now)
     comment = models.TextField()

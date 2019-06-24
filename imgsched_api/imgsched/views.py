@@ -1,33 +1,24 @@
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
+from rest_framework import generics
 from imgsched.models import Comment, UserProfile, Meeting
-from imgsched.serializer import CommentSerializers, UserProfilesSerializers, MeetingSerializers 
+from imgsched.serializer import CommentSerializers, UserProfilesSerializers, MeetingSerializers
 
-@csrf_exempt
-def profile_list(request):
-    if request.method == "GET":
-        profile = UserProfile.objects.all()
-        serializer = UserProfilesSerializers(profile, many=True)
-        return JsonResponse(serializer.data, safe=False)
 
-@csrf_exempt
-def specfic_profile(request, pk):
-    if request.method == "GET":
-        profile = UserProfile.objects.get(pk=pk)
-        serializer = UserProfilesSerializers(profile)
-        return JsonResponse(serializer.data, safe=False)
+class ProfileList(generics.ListCreateAPIView):
+        queryset = UserProfile.objects.all()
+        serializer_class = UserProfilesSerializers
 
-@csrf_exempt
-def meeting_list(request):
-    if request.method == "GET":
-        meeting = Meeting.objects.all()
-        serializer = MeetingSerializers(meeting, many=True)
-        return JsonResponse(serializer.data, safe=False)
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+        queryset = UserProfile.objects.all()
+        serializer_class = UserProfilesSerializers
 
-@csrf_exempt
-def specific_meeting(request, pk):
-    if request.method == "GET":
-        meeting = Meeting.objects.get(pk=pk)
-        serializer = MeetingSerializers(meeting)
-        return JsonResponse(serializer.data, safe=False)
+class MeetingList(generics.ListCreateAPIView):
+        queryset = Meeting.objects.all()
+        serializer_class = MeetingSerializers
+
+class MeetingDetail(generics.RetrieveUpdateDestroyAPIView):
+        queryset = Meeting.objects.all()
+        serializer_class = MeetingSerializers
+
+class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+        queryset = Comment.objects.all()
+        serializer_class = CommentSerializers

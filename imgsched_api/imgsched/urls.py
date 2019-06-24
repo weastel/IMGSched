@@ -1,9 +1,12 @@
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
 from imgsched import views
 
 urlpatterns = [
-    path('profile', views.profile_list),
-    path('profile/<int:pk>/', views.specfic_profile),
-    path('meeting', views.meeting_list),
-    path('meeting/<int:pk>/', views.specific_meeting)
+    path('profile', views.ProfileList.as_view()),
+    path('profile/<int:pk>/', views.ProfileDetail.as_view()),
+    path('meeting', views.MeetingList.as_view()),
+    path('meeting/<int:pk>/', views.MeetingDetail.as_view())
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
