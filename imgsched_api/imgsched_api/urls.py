@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('imgsched.urls')),
     path('', include('social_django.urls', namespace='social')),
+    path('react/', include('frontend.urls'))
 ]
