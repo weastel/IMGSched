@@ -1,14 +1,13 @@
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.routers import DefaultRouter
 from imgsched import views
+from imgsched.api import UserViewSet, CommentViewSet, MeetingViewSet
 
-urlpatterns = [
-    path('profile', views.ProfileList.as_view()),
-    path('profile/<int:pk>/', views.ProfileDetail.as_view()),
-    path('meeting', views.MeetingList.as_view()),
-    path('meeting/<int:pk>/', views.MeetingDetail.as_view()),
-    path('', views.index, name='home'),
-    path('logout', views.logout_view)
-]
+router = DefaultRouter()
+router.register('meeting', MeetingViewSet, basename="Meeting")
+router.register('comment', CommentViewSet)
+router.register('Users', UserViewSet)
+urlpatterns = router.urls
 
-urlpatterns = format_suffix_patterns(urlpatterns)
+urlpatterns.append(path('home',views.index,name="home"))
+urlpatterns.append(path('logout',views.logout_view))

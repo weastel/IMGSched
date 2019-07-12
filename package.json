@@ -4,7 +4,7 @@
   "description": "A portal where developers will schedule all their meetings",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./imgsched_api/frontend/src/index.js --output ./imgsched_api/frontend/static/frontend/main.js",
+    "dev": "webpack --mode development --watch ./imgsched_api/frontend/src/index.js --output ./imgsched_api/frontend/static/frontend/main.js",
     "build": "webpack --mode production ./imgsched_api/frontend/src/index.js --output ./imgsched_api/frontend/static/frontend/main.js"
   },
   "repository": {
@@ -30,5 +30,12 @@
     "weak-key": "^1.0.1",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   }
 }
