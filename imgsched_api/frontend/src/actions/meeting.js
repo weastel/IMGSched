@@ -1,11 +1,16 @@
-import axios from 'axios'
+import axios from "axios";
 
-import { GET_MEETINGS } from './types'
+import { GET_MEETINGS } from "./types";
 
 export const getMeetings = () => dispatch => {
-    axios.get('127.0.0.1:8000/api/meeting/')
-        .then(res => {
-            console.log(res.data)
-        })
-        .catch(err => console.log(err))
-}
+  axios
+    .get("/api/meeting/")
+    .then(res => {
+      console.log("This is working");
+      dispatch({
+        type: GET_MEETINGS,
+        payload: res.data,
+      });
+    })
+    .catch(err => console.log("error", err));
+};
